@@ -9,8 +9,10 @@ export const COLORS = {
     reddish:"#cf0015",
     black: "#1E1F20",
     white: "#FFFFFF",
+    lightRed:'#F9f5f5',
 
     lightGray: "#FCFBFC",
+    bgcolor:'#f7f9fb',
     gray: "#C1C3C5",
     darkgray: "#C3C6C7",
 
@@ -44,6 +46,7 @@ export const SIZES = {
 
 export const FONTS = {
     largeTitle: { fontFamily: "Roboto-regular", fontSize: SIZES.largeTitle, lineHeight: 55 },
+    h0: { fontFamily: "Roboto-Black", fontSize: SIZES.h1*1.5, lineHeight: 48 },
     h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, lineHeight: 36 },
     h2: { fontFamily: "Roboto-Bold", fontSize: SIZES.h2, lineHeight: 30 },
     h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, lineHeight: 22 },

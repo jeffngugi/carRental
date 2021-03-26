@@ -13,19 +13,24 @@ const TabNavigator = () => {
                 showLabel:false,
                 activeBackgroundColor: COLORS.reddish,
                 inactiveBackgroundColor: COLORS.transparent,
+                tabStyle:{
+                    borderTopRightRadius:20,
+                    borderTopLeftRadius:20,
+                    paddingVertical:3
+                },
                 style:{
                     position:'absolute',
                     bottom:0,
                     right:0,
                     left:0,
                     elevation:0,
-                    height:55,
-                    borderTopRightRadius: 20,
-                    borderTopLeftRadius: 20,
+                    height:60,
 
                 },
                 
             }}
+            
+            
         >
             <Tab.Screen
                 name="Home"
@@ -35,8 +40,6 @@ const TabNavigator = () => {
                         <View style={{
                                 alignItems:'center',
                                 justifyContent:'center',
-                                borderTopRightRadius: 20,
-                                borderTopLeftRadius: 20,
                                 }}>
                             <Image 
                                 source={icons.home}
@@ -58,17 +61,84 @@ const TabNavigator = () => {
             <Tab.Screen
                 name="Ride"
                 component={Home}
+                options={{
+                    tabBarIcon:({focused })=> (
+                        <View style={{
+                                alignItems:'center',
+                                justifyContent:'center',
+                                }}>
+                            <Image 
+                                source={icons.steer}
+                                resizeMode='contain'
+                                style={{
+                                    width:30,
+                                    height:30,
+                                    tintColor:focused?COLORS.white: COLORS.reddish
+                                }}
+                            />
+                            <Text style={{
+                                color:focused?COLORS.white:COLORS.reddish,
+                                
+                            }}>RIDE</Text>
+                        </View>
+                    )
+                }}
             />
             <Tab.Screen
                 name="Chat"
                 component={Home}
+                options={{
+                    tabBarIcon:({focused })=> (
+                        <View style={{
+                                alignItems:'center',
+                                justifyContent:'center',
+                                }}>
+                            <Image 
+                                source={icons.chat}
+                                resizeMode='contain'
+                                style={{
+                                    width:30,
+                                    height:30,
+                                    tintColor:focused?COLORS.white: COLORS.reddish
+                                }}
+                            />
+                            <Text style={{
+                                color:focused?COLORS.white:COLORS.reddish,
+                                
+                            }}>CHAT</Text>
+                        </View>
+                    )
+                }}
             />
             <Tab.Screen
                 name="Share"
                 component={Home}
+                options={{
+                    tabBarIcon:({focused })=> (
+                        <View style={{
+                                alignItems:'center',
+                                justifyContent:'center',
+                                }}>
+                            <Image 
+                                source={icons.suv}
+                                resizeMode='contain'
+                                style={{
+                                    width:30,
+                                    height:30,
+                                    tintColor:focused?COLORS.white: COLORS.reddish
+                                }}
+                            />
+                            <Text style={{
+                                color:focused?COLORS.white:COLORS.reddish,
+                                
+                            }}>SHARE RIDE</Text>
+                        </View>
+                    )
+                }}
             />
         </Tab.Navigator>
     )
 }
 
 export default TabNavigator
+
