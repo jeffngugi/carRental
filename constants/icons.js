@@ -8,7 +8,9 @@ const steer = require("../assets/icons/steer.png");
 const suv = require("../assets/icons/suv-car.png");
 const home = require("../assets/icons/home.png")
 const chat = require("../assets/icons/chat.png")
+const chat2 = require("../assets/icons/chat2.png")
 const down = require("../assets/icons/down.png")
+const star = require("../assets/icons/star.png")
 
 export default {
     back,
@@ -21,5 +23,7 @@ export default {
     suv,
     home,
     chat,
-    down
+    down,
+    chat2,
+    star
 }

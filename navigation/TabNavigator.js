@@ -1,6 +1,7 @@
 import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Home from '../screens/Home'
+import HomeStack from './HomeStack'
 import {COLORS, icons} from '../constants'
 import {View, Image, Text} from 'react-native'
 
@@ -59,7 +60,7 @@ const TabNavigator = () => {
                 }}
             />
             <Tab.Screen
-                name="Ride"
+                name="Rides"
                 component={Home}
                 options={{
                     tabBarIcon:({focused })=> (
@@ -79,7 +80,7 @@ const TabNavigator = () => {
                             <Text style={{
                                 color:focused?COLORS.white:COLORS.reddish,
                                 
-                            }}>RIDE</Text>
+                            }}>RIDES</Text>
                         </View>
                     )
                 }}
