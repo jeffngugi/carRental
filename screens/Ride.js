@@ -1,28 +1,64 @@
-import React from 'react'
-import {View, Text, Image, TouchableOpacity, SafeAreaView,StyleSheet, ScrollView} from 'react-native'
+import React, {useRef, useState, } from 'react'
+import {View, Text, Image, TouchableOpacity, Dimensions, SafeAreaView,StyleSheet, ScrollView, FlatList} from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import {COLORS,icons, SIZES, FONTS, images} from '../constants'
 import Dates from '../components/Dates';
 import Rating from '../components/Rating';
+const {width, height} = Dimensions.get('screen')
+const IMG_SIZE = 80;
+const SPACING = 10;
+
 
 const Ride = ({route}) => {
     const { carId, car } = route.params;
     const {name, trips, year} = car
+    const [activeIndex, setActiveIndex] = useState(0)
+    const topRef = useRef();
+    const thumbRef = useRef();
+
     const imags = [
         {
+            id:1,
           original: 'https://picsum.photos/id/1018/1000/600/',
           thumbnail: 'https://picsum.photos/id/1018/250/150/',
         },
         {
+            id:2,
           original: 'https://picsum.photos/id/1015/1000/600/',
           thumbnail: 'https://picsum.photos/id/1015/250/150/',
         },
         {
+            id:3,
           original: 'https://picsum.photos/id/1019/1000/600/',
           thumbnail: 'https://picsum.photos/id/1019/250/150/',
         },
       ];
     
+
+
+
+      const scrollToActiveIndex = (index)=>{
+        setActiveIndex(index)
+        topRef?.current?.scrollToOffset({
+            offset:index * SIZES.width-20,
+            animated:true
+        })
+
+        if(index * (IMG_SIZE + SPACING) - IMG_SIZE /2 > width/2){
+            thumbRef?.current?.scrollToOffset({
+                offset:index *(IMG_SIZE + SPACING) - width/2 + IMG_SIZE/2,
+                animated:true 
+            })
+        }else{
+            thumbRef?.current?.scrollToOffset({
+                offset:0,
+                animated:true 
+            })
+        }
+    }
+
+    console.log(activeIndex)
+
     const navigation = useNavigation();
     const renderTopNav = ()=>{
         return(
@@ -107,11 +143,57 @@ const Ride = ({route}) => {
     }
 
     const renderImages = ()=>{
+        
         return(
             <View style={{
-                marginVertical:10
+                width:SIZES.width-20,
+                height:SIZES.width + IMG_SIZE +SPACING
             }}>
-               <Text>Imaged will be here</Text>
+                <FlatList 
+                ref={topRef}
+                horizontal
+                pagingEnabled
+                data={imags}
+                showsHorizontalScrollIndicator={false}
+                onMomentumScrollEnd ={ev => {
+                    scrollToActiveIndex(Math.floor(ev.nativeEvent.contentOffset.x/(SIZES.width-20)))
+                }}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({item})=>{
+                    return <View style={{width:SIZES.width-20,height:SIZES.width}}> 
+                                <Image source={{uri:item.original}}  resizeMode='contain' style={[StyleSheet.absoluteFill]}/>
+                            </View>
+                }}
+            />
+
+
+            <FlatList 
+                ref={thumbRef}
+                horizontal
+                pagingEnabled
+                data={imags}
+                keyExtractor={item => item.id.toString()}
+                style={{marginVertical:SIZES.base, }}
+                contentContainerStyle={{paddingHorizontal:SPACING}}
+                renderItem={({item, index})=>{
+                    return <TouchableOpacity
+                                onPress={()=>scrollToActiveIndex(index)}
+                            >
+                        <Image source={{uri:item.thumbnail}} style={{
+                        width:IMG_SIZE,
+                        height:IMG_SIZE,
+                        borderRadius:12,
+                        marginRight:SPACING,
+                        borderWidth:2,
+                        borderColor:activeIndex === index ? COLORS.reddish: 'transparent'
+                    }}/>
+                    </TouchableOpacity>
+                         
+                }}/>
+                
+
+                
+                
             </View>
         )
     }
