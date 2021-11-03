@@ -5,7 +5,7 @@ import {SIZES, images, COLORS, FONTS} from '../constants'
 import Rating from './Rating'
 
 const Popular = ({navigation, car}) => {
-    const {name, year, cost, trips} = car
+    const {name, year, cost, trips, image} = car
     return (
        
         <TouchableOpacity
@@ -33,7 +33,7 @@ const Popular = ({navigation, car}) => {
             >
                 <Image
                     resizeMode='stretch'
-                    source={images.mustang1}
+                    source={image}
                     style={{
                         width:'100%',
                         height:'100%',

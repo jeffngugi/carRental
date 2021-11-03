@@ -13,22 +13,17 @@ const Home = ({navigation}) => {
 
     const [locations, setLocations] = useState([{"id":1, "name":'kikuyu, Kiambu'}, {"id":2, "name":'Nairobi, Kenya'},{"id":3, "name":'Ruiru, Kenya'}, {"id":4, "name":'Thika, Kiambu'}])
     const [cars, setCars] = useState([
-        {"id":1, "name":" Volkswagen Golf", "category":"hatchback" },
-        {"id":2, "name":" Audi A3", "category":"hatchback" },
-        {"id":3, "name":" Mazda 3", "category":"hatchback" },
-        {"id":4, "name":"Subaru Impreza", "category":"sedan" },
-        {"id":5, "name":" Toyota Corolla", "category":"sedan" },
-        {"id":6, "name":" BMW X4", "category":"suv" },
-        {"id":7, "name":"Chevrolet Blazer" , "category":"suv" },
-        {"id":8, "name":"Audi Q3", "category":"Crossover" },
-        {"id":8, "name":"Audi Q3", "category":"Crossover" },
+        {"id":1, "name":" Chev os12", "category":"hatchback",image:images.car1 },
+        {"id":2, "name":"BMW i231", "category":"hatchback",image:images.c2 },
+        {"id":3, "name":" Audi A3", "category":"hatchback",image:images.c3 },
+        {"id":4, "name":"Merc AMG", "category":"sedan",image:images.c1 }
     ])
 
     const [popular, setPopular] = useState([
-        {"id":1, "name":" Volkswagen Golf", "category":"hatchback", "year":2012, "cost":2000,"trips":23 },
-        {"id":2, "name":" Audi A3", "category":"hatchback", "year":2013,"cost":2500 ,"trips":44},
-        {"id":3, "name":" Mazda 3", "category":"hatchback" ,"year":2014,"cost":3000,"trips":56},
-        {"id":4, "name":"Subaru Impreza", "category":"sedan", "year":2011,"cost": 200,"trips":63},
+        {"id":1, "name":" Volkswagen Golf", "category":"hatchback", "year":2012, "cost":2000,"trips":23,image:images.mustang1 },
+        {"id":2, "name":" Audi A3", "category":"hatchback", "year":2013,"cost":2500 ,"trips":44,image:images.c3},
+        {"id":3, "name":" Chev 3", "category":"hatchback" ,"year":2014,"cost":3000,"trips":56,image:images.car1},
+        {"id":4, "name":"Mercidez benz", "category":"sedan", "year":2011,"cost": 200,"trips":63,image:images.c1},
     ])
 
     const [selectedLocation, setSelectedLocation] = useState({"id":1, "name":'kikuyu'})
@@ -312,7 +307,7 @@ const Home = ({navigation}) => {
     const renderCaurosel = () =>{
         
 
-        const _renderItem = ()=>{
+        const _renderItem = (item)=>{
             return(
          <View style={{ marginHorizontal:SIZES.padding2}}>
                 <View 
@@ -334,7 +329,7 @@ const Home = ({navigation}) => {
             >
                 <Image
                     resizeMode='stretch'
-                    source={images.car1}
+                    source={item.image}
                     style={{
                         width:'100%',
                         height:'100%',
@@ -358,7 +353,7 @@ const Home = ({navigation}) => {
                 </View>
                 
             </View>
-            <CarHeading />
+            <CarHeading item={item}/>
         </View>
         </View>
             )
@@ -369,7 +364,7 @@ const Home = ({navigation}) => {
                  <Carousel
                     ref={carouselRef}
                     data={cars}
-                    renderItem={_renderItem}
+                    renderItem={({ item, index })=>_renderItem(item)}
                     sliderWidth={SIZES.width}
                      itemWidth={SIZES.width }
                      layout={'default'}
@@ -388,7 +383,7 @@ const Home = ({navigation}) => {
                 }}>
                     <Pagination
                         
-                        dotsLength={5}
+                        dotsLength={4}
                         activeDotIndex={active}
                         containerStyle={{ backgroundColor:COLORS.white, paddingVertical:2, paddingHorizontal:0}}
                         dotStyle={{
