@@ -19,18 +19,33 @@ const Ride = ({route}) => {
     const imags = [
         {
             id:1,
-          original: 'https://picsum.photos/id/1018/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1018/250/150/',
+          original: images.c1,
+          thumbnail: images.c1,
         },
         {
             id:2,
-          original: 'https://picsum.photos/id/1015/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1015/250/150/',
+          original: images.c2,
+          thumbnail: images.c2,
         },
         {
             id:3,
-          original: 'https://picsum.photos/id/1019/1000/600/',
-          thumbnail: 'https://picsum.photos/id/1019/250/150/',
+          original: images.c3,
+          thumbnail: images.c3,
+        },
+        {
+            id:4,
+          original: images.c4,
+          thumbnail: images.c4,
+        },
+        {
+            id:5,
+          original: images.c5,
+          thumbnail: images.c5,
+        },
+        {
+            id:6,
+          original: images.c6,
+          thumbnail: images.c6,
         },
       ];
     
@@ -57,7 +72,6 @@ const Ride = ({route}) => {
         }
     }
 
-    console.log(activeIndex)
 
     const navigation = useNavigation();
     const renderTopNav = ()=>{
@@ -147,7 +161,6 @@ const Ride = ({route}) => {
         return(
             <View style={{
                 width:SIZES.width-20,
-                height:SIZES.width + IMG_SIZE +SPACING
             }}>
                 <FlatList 
                 ref={topRef}
@@ -160,8 +173,8 @@ const Ride = ({route}) => {
                 }}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({item})=>{
-                    return <View style={{width:SIZES.width-20,height:SIZES.width}}> 
-                                <Image source={{uri:item.original}}  resizeMode='contain' style={[StyleSheet.absoluteFill]}/>
+                    return <View style={{width:SIZES.width-20,height:SIZES.width/1.7}}> 
+                                <Image source={item.original}  resizeMode='contain' style={{width:'100%', height:'100%'}}/>
                             </View>
                 }}
             />
@@ -173,13 +186,13 @@ const Ride = ({route}) => {
                 pagingEnabled
                 data={imags}
                 keyExtractor={item => item.id.toString()}
-                style={{marginVertical:SIZES.base, }}
-                contentContainerStyle={{paddingHorizontal:SPACING}}
+                style={{marginVertical:10}}
+                contentContainerStyle={{paddingHorizontal:SPACING, marginBottom:0}}
                 renderItem={({item, index})=>{
                     return <TouchableOpacity
                                 onPress={()=>scrollToActiveIndex(index)}
                             >
-                        <Image source={{uri:item.thumbnail}} style={{
+                        <Image source={item.thumbnail} style={{
                         width:IMG_SIZE,
                         height:IMG_SIZE,
                         borderRadius:12,
